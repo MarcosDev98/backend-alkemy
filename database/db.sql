@@ -30,3 +30,4 @@ CREATE TABLE type_transaction(
   type VARCHAR(20) NOT NULL,
 );
 
+--a comment for git: mysql and mysql-workbench installed and configured
