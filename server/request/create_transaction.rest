@@ -1,0 +1,9 @@
+POST http://localhost:5005/transaction/add
+Content-Type: application/json
+
+{
+  "concept": "Deudas",
+  "amount": "45000",
+  "date": "03/02/22",
+
+}
