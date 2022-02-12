@@ -5,7 +5,7 @@ require('dotenv').config();
 
 
 
-const connection = mysql.createConnection({
+const db = mysql.createConnection({
   host: 'localhost',
   user: 'root',
   password: 'fisura20',
@@ -13,13 +13,8 @@ const connection = mysql.createConnection({
 });
 
 
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log('Connected!');
-});
 
-
-connection.connect((err) => {
+db.connect((err) => {
   if (err) {
     if (err.code === 'PROTOCOL_CONECTION_LOST') {
       console.error('DATABASE CONNECTION WAS CLOSED');
@@ -39,7 +34,7 @@ connection.connect((err) => {
 });
 
 // Promosify callbacks querys
-connection.query = promisify(connection.query);
+db.query = promisify(db.query);
 
 
 const app = express();
@@ -52,24 +47,47 @@ app.get('/', (req, res) => {
   res.send('<h1>Hello World from root route</h1>');
 });
 
+
+// AGREGAR UNA TRANSACCION
 app.post('/transaction/add', async (req, res) => {
-  const { concept, amount, date, type, user_id, id_type_transaction } = req.body;
+  const { concept, amount, date, user_id, id_type_transaction } = req.body;
   const newTransaction = {
     concept,
     amount,
     date,
-    type,
     user_id,
     id_type_transaction
   };
 
   await db.query('INSERT INTO transaction set ?', [newTransaction]);
+  console.log(newTransaction);
   res.send('request received');
 });
 
+
+// OBTENER TRANSACCIONES
 app.get('/transaction/all', async (req, res) => {
+  const transactions = await db.query('SELECT id, concept, amount, date, user_id, id_type_transaction FROM transaction;');
+  console.log(transactions);
+  res.send('transactions iran aca');
 
 });
+
+
+// AGREGAR UN USUARIO
+app.post('/user/add', async (req, res) => {
+  const { username, password, email, firstname, lastname } = req.body;
+
+  const newUser = { username, password, email, firstname, lastname };
+
+  await db.query('INSERT INTO user SET ?', [newUser]);
+  console.log(newUser);
+  res.send('request received');
+});
+
+app.put('/user/')
+
+// TODO: DB: field is_deleted.
 
 
 app.listen(PORT, () => {
