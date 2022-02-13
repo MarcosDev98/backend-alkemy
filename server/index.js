@@ -82,12 +82,27 @@ app.post('/user/add', async (req, res) => {
 
   await db.query('INSERT INTO user SET ?', [newUser]);
   console.log(newUser);
-  res.send('request received');
+  res.send('user added');
 });
 
-app.put('/user/')
+app.put('/user/update', async (req, res) => {
+  const { id, password, email, firstname, lastname } = req.body;
 
-// TODO: DB: field is_deleted.
+  //const modifyUser = { id, password, email, firstname, lastname };
+
+  // eslint-disable-next-line quotes
+  await db.query(`UPDATE user SET password=${password}, email=${email}, firstname=${firstname}, lastname=${lastname} WHERE id=${id};`);
+  res.send('user updated');
+});
+
+app.delete('/user/delete', async (req, res) => {
+  const { id } = req.body;
+
+  await db.query(`UPDATE user SET is_deleted=${'Y'} WHERE id=${id};`);
+
+  res.send('user deleted');
+
+});
 
 
 app.listen(PORT, () => {
