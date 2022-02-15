@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql');
 const { promisify } =  require('util');
-require('dotenv').config();
 
 
 
@@ -149,31 +148,66 @@ app.post('/category/add', async (req, res) => {
 
 });
 
-// OBTENER TRANSACCIONES
+// OBTENER CATEGORIAS
 app.get('/category/all', async (req, res) => {
-  const categories = await db.query(`SELECT id, name, is_deleted FROM category WHERE is_deleted=${is_not_deleted}`);
+  const categories = await db.query(`SELECT id, name, is_deleted FROM category WHERE is_deleted=${is_not_deleted};`);
   console.log(categories);
   res.send(categories);
 });
 
-// EDITAR TRANSACCION
+// EDITAR CATEGORIA
 
 app.put('/category/update', async (req, res) => {
   const { id, name } = req.body;
   
   // eslint-disable-next-line quotes
-  await db.query(`UPDATE category SET name=${name} WHERE id=${id}`);
+  await db.query(`UPDATE category SET name=${name} WHERE id=${id};`);
   
   res.send('category edited');
 
 });
 
+// ELIMINAR CATEGORIA
 app.delete('/category/delete', async (req, res) => {
   const { id } = req.body;
 
-  await db.query(`UPDATE category SET is_deleted=${is_deleted} WHERE id=${id}`);
+  await db.query(`UPDATE category SET is_deleted=${is_deleted} WHERE id=${id};`);
   res.send('category deleted');
 }); 
+
+// OBTENER TIPOS
+app.get('/type/all', async (req, res) => {
+  const types = await db.query(`SELECT id, type, is_deleted FROM type_transaction WHERE is_deleted='${is_not_deleted}'`);
+  res.send(types);
+});
+
+// AGREGAR UN TIPO
+app.post('/type/add', async (req, res) => {
+  const { type } = req.body;
+
+  const newType = { type, is_not_deleted };
+
+  await db.query('INSERT INTO type_transaction SET ?', [newType]);
+  res.send('type_transaction added');
+
+});
+
+// EDITAR UN TIPO
+app.put('/type/update', async (req, res) => {
+  const { id, type } = req.body;
+
+  await db.query(`UPDATE type_transaction SET type=${type} WHERE id=${id}`);
+  res.send('type_transaction edited');
+});
+
+// ELIMINAR UN TIPO
+app.delete('/type/delete', async (req, res) => {
+  const { id } = req.body;
+
+  await db.query(`UPDATE type_transaction SET is_deleted=? WHERE id=${id};`, is_deleted);
+  res.send('type deleted');
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server running on localhost:${PORT}`);
