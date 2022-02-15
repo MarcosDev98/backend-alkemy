@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 const mysql = require('mysql');
 const { promisify } =  require('util');
 require('dotenv').config();
@@ -39,7 +40,9 @@ db.query = promisify(db.query);
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
+
 
 const PORT = 5005;
 
