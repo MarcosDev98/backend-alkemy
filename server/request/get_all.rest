@@ -1,0 +1,2 @@
+GET http://localhost:5005/transaction/all
+Content-Type: application/json
