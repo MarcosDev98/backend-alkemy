@@ -2,8 +2,10 @@ POST http://localhost:5005/transaction/add
 Content-Type: application/json
 
 {
-  "concept": "Deudas",
-  "amount": "45000",
-  "date": "03/02/22",
-
+  "concept": "venta2",
+  "amount": "4000",
+  "date": "17/02/22",
+  "user_id": "1",
+  "id_type_transaction": "1",
+  "category_id": "1"
 }
