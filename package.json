@@ -20,12 +20,13 @@
   },
   "homepage": "https://github.com/MarcosDev98/backend-alkemy#readme",
   "devDependencies": {
-    "eslint": "^8.8.0",
-    "nodemon": "^2.0.15"
+    "eslint": "8.8.0",
+    "nodemon": "2.0.15"
   },
   "dependencies": {
     "cors": "2.8.5",
-    "express": "^4.17.2",
-    "mysql": "^2.18.1"
+    "dotenv": "16.0.0",
+    "express": "4.17.2",
+    "mysql": "2.18.1"
   }
 }
