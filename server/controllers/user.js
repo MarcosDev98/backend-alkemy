@@ -2,6 +2,9 @@ const userRouter = require('express').Router();
 const mysqlConnection = require('../db');
 const { is_deleted, is_not_deleted } = require('../index');
 const bcrypt = require('bcrypt');
+const express = require('express');
+
+userRouter.use(express.json());
 
 // AGREGAR UN USUARIO
 userRouter.post('/create', async (req, res) => {

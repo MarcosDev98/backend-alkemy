@@ -4,11 +4,12 @@ const { promisify } =  require('util');
 
 
 const mysqlConnection =  createConnection({
-  host: process.env.HOST,
-  user: process.env.USER,
-  password: process.env.PASSWORD,
-  database: process.env.DATABASE
+  host: 'localhost',
+  user: 'root',
+  password: 'fisura20',
+  database: 'alkemy_fullstack'
 });
+
 
 mysqlConnection.connect((err) => {
   if (err) {

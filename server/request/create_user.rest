@@ -1,0 +1,10 @@
+POST http://localhost:5005/api/users/create
+Content-Type: application/json
+
+{
+  "username": "marcosolda",
+  "password": "dado1314",
+  "email": "marcos1903@live.com.ar",
+  "firstname": "Marcos",
+  "lastname": "Aguado",
+}

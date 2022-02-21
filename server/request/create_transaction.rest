@@ -1,4 +1,4 @@
-POST http://localhost:5005/transaction/add
+POST http://localhost:5005/api/transaction/create
 Content-Type: application/json
 
 {

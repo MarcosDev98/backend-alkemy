@@ -26,5 +26,4 @@ app.use('/api/users', usersRouter);
 app.listen(process.env.PORT);
 console.log('listen on PORT:', process.env.PORT);
 
-module.exports = is_deleted;
-module.exports = is_not_deleted;
+module.exports = { is_deleted, is_not_deleted };
