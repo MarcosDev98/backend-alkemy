@@ -4,13 +4,11 @@ const cors = require('cors');
 const app = express();
 
 const usersRouter = require('./controllers/user');
-// const transactionsRouter = require('./controllers/transaction');
-// const typesRouter = require('./controllers/type');
-// const categoriesRouter = require('./controllers/category');
-// GLOBALES
+const transactionsRouter = require('./controllers/transaction');
+const typesRouter = require('./controllers/type');
+const categoriesRouter = require('./controllers/category');
+const loginRouter = require('./controllers/login');
 
-const is_deleted = 'Y';
-const is_not_deleted = 'N';
 
 
 app.use(cors());
@@ -18,12 +16,11 @@ app.use(express.json());
   
 
 app.use('/api/users', usersRouter);
-// app.use('/api/transactions', transactionsRouter);
-// app.use('/api/type', typesRouter);
-// app.use('/api/category', categoriesRouter);
+app.use('/api/transactions', transactionsRouter);
+app.use('/api/type', typesRouter);
+app.use('/api/category', categoriesRouter);
+app.use('/api/login', loginRouter);
 
-
-app.listen(process.env.PORT);
-console.log('listen on PORT:', process.env.PORT);
-
-module.exports = { is_deleted, is_not_deleted };
+const PORT = 5005;
+app.listen(PORT);
+console.log('listen on PORT:', PORT);
