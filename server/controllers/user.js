@@ -1,6 +1,6 @@
 const userRouter = require('express').Router();
 const mysqlConnection = require('../db');
-const { is_deleted, is_not_deleted } = require('../index');
+const { is_deleted, is_not_deleted } = require('../utils/globals.js');
 const bcrypt = require('bcrypt');
 const express = require('express');
 
@@ -13,7 +13,7 @@ userRouter.post('/create', async (req, res) => {
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  await mysqlConnection.query(`INSERT INTO user (username, password, email, firstname, lastname, is_deleted) SET VALUES('${username}', '${hashedPassword}', '${email}', '${firstname}', '${lastname}', '${is_not_deleted}');`);
+  await mysqlConnection.query(`INSERT INTO user (username, password, email, firstname, lastname, is_deleted) VALUES('${username}', '${hashedPassword}', '${email}', '${firstname}', '${lastname}', '${is_not_deleted}');`);
   res.send('user added');
 });
 
@@ -35,5 +35,6 @@ userRouter.delete('/delete', async (req, res) => {
   res.send('user deleted');
 
 });
+
 
 module.exports = userRouter;

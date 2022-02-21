@@ -1,6 +1,6 @@
 const categoriesRouter = require('express').Router();
 const mysqlConnection = require('../db');
-const { is_deleted, is_not_deleted } = require('../index');
+const { is_deleted, is_not_deleted } = require('../utils/globals.js');
 
 
 // OBTENER CATEGORIAS

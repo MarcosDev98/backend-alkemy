@@ -6,5 +6,5 @@ Content-Type: application/json
   "password": "dado1314",
   "email": "marcos1903@live.com.ar",
   "firstname": "Marcos",
-  "lastname": "Aguado",
+  "lastname": "Aguado"
 }

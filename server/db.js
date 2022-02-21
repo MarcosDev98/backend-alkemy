@@ -3,6 +3,8 @@ const { createConnection } = require('mysql');
 const { promisify } =  require('util');
 
 
+console.log(process.env);
+
 const mysqlConnection =  createConnection({
   host: 'localhost',
   user: 'root',
