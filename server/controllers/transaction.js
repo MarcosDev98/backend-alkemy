@@ -1,6 +1,7 @@
 const transactionsRouter = require('express').Router();
 const mysqlConnection = require('../db');
 const { is_deleted, is_not_deleted } = require('../utils/globals.js');
+const jwt = require('jsonwebtoken');
 
 // OBTENER TRANSACCIONES
 transactionsRouter.get('/', async (req, res) => {
@@ -12,11 +13,35 @@ transactionsRouter.get('/', async (req, res) => {
 });
 
 // AGREGAR TRANSACCION
-transactionsRouter.post('/create', async (req, res) => {
-  const { concept, amount, date, user_id, id_type_transaction, category_id } = req.body;
+transactionsRouter.post('/create', async (request, response) => {
+  const { concept, amount, date, id_type_transaction, category_id } = request.body;
   // eslint-disable-next-line quotes
+
+  const authorization = request.get('authorization');
+  let token = '';
+
+  if (authorization && authorization.toLowerCase().startsWith('bearer')) {
+    token = authorization.substring(7);
+  } 
+
+
+  const decodedToken = jwt.verify(token, 'alkemy');
+
+  console.log(decodedToken);
+
+  if (!token ||  !decodedToken.id) {
+    return response.status(401).json({ error: 'token inconrrecto o inexistente' });
+  }
+
+  const { id: user_id } = decodedToken;
+
+
+  // TODO: verificar si existe el usuario
+
+
   await mysqlConnection.query(`INSERT INTO transaction (concept, amount, date, user_id, id_type_transaction, is_deleted, category_id) VALUES('${concept}', '${amount}', '${date}', '${user_id}', '${id_type_transaction}', '${is_not_deleted}', '${category_id}');`);
-  res.send('request received');
+
+  response.send('OK, transaction created');
 });
 
   
