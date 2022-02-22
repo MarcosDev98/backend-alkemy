@@ -17,8 +17,8 @@ app.use(express.json());
 
 app.use('/api/users', usersRouter);
 app.use('/api/transactions', transactionsRouter);
-app.use('/api/type', typesRouter);
-app.use('/api/category', categoriesRouter);
+app.use('/api/types', typesRouter);
+app.use('/api/categories', categoriesRouter);
 app.use('/api/login', loginRouter);
 
 const PORT = 5005;
