@@ -1,11 +1,11 @@
 POST http://localhost:5005/api/transactions/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJtYXJjb3NvbGRhIiwiaWF0IjoxNjQ1NTM0MDE5fQ.j9Lw7NWTsxRLlSii0wdKnr5_61NOizeHQn1TfTu_840
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJtYXJjb3NvbGRhIiwiaWF0IjoxNjQ1NTM4NTcwfQ.GceWn3KHfgPLC6Vkdw2gLroZzo1IqcVYuJnOJGM-FSU
 
 {
-  "concept": "compraDeMateriales2",
-  "amount": "35000",
+  "concept": "usando-middleware",
+  "amount": "15000",
   "date": "22/02/22",
-  "id_type_transaction": "2",
+  "id_type_transaction": "1",
   "category_id": "0"
 }
