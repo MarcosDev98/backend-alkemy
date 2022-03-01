@@ -14,14 +14,14 @@ transactionsRouter.get('/', async (req, res) => {
 
 // AGREGAR TRANSACCION
 transactionsRouter.post('/create', async (request, response) => {
-  const { concept, amount, date, id_type_transaction, category_id } = request.body;
+  const { concept, amount, date, id_type_transaction } = request.body;
   
   // TODO: verificar si existe el usuario
   
   //const { user_id } = request;
   
 
-  await mysqlConnection.query(`INSERT INTO transaction (concept, amount, date, user_id, id_type_transaction, is_deleted, category_id) VALUES('${concept}', '${amount}', '${date}', ${5}, '${id_type_transaction}', '${is_not_deleted}', '${category_id}');`);
+  await mysqlConnection.query(`INSERT INTO transaction (concept, amount, date, user_id, id_type_transaction, is_deleted, category_id) VALUES('${concept}', '${amount}', '${date}', ${5}, '${id_type_transaction}', '${is_not_deleted}', '${0}');`);
 
   response.send('OK, transaction created');
 });

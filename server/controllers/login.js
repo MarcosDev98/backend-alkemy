@@ -39,10 +39,6 @@ loginRouter.post('/', async (require, response) => {
     return response.status(401).json({
       error: 'usuario o contraseña incorrectos'
     });
-
-    //no me gusta este return pero no supe como hacer que termine con el response de arriba.
-    // Porque si no pongo el return, sigue ejecutando y revienta en user[0].id porque no hay nada en user[0].
-    //return
   } 
 
   const userForToken = {

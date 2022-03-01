@@ -1,11 +1,11 @@
 POST http://localhost:5005/api/transactions/create
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJtYXJjb3NvbGRhIiwiaWF0IjoxNjQ1NTM4NTcwfQ.GceWn3KHfgPLC6Vkdw2gLroZzo1IqcVYuJnOJGM-FSU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywidXNlcm5hbWUiOiJtYXJjb3NvbGRhIiwiaWF0IjoxNjQ2MTM1MTM3fQ.Myg0ZHEUT8-f7TcAsM9O-fpMdALATQuPXjkMKd5icLk
 
 {
-  "concept": "usando-middleware",
-  "amount": "15000",
-  "date": "22/02/22",
+  "concept": "con Auth",
+  "amount": "16500",
+  "date": "01/03/22",
   "id_type_transaction": "1",
   "category_id": "0"
 }
