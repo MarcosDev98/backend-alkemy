@@ -50,8 +50,11 @@ loginRouter.post('/', async (require, response) => {
 
   response.send({
     id: user[0].id,
-    name: user[0].firstname,
     username: user[0].username,
+    password: user[0].password,
+    email: user[0].email,
+    firstname: user[0].firstname,
+    lastname: user[0].lastname,
     token
   });
 
