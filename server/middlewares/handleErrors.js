@@ -1,5 +1,18 @@
-module.exports = (error, request, response, next) => {
-  console.error(error);
+// eslint-disable-next-line no-unused-vars
+const { response } = require('express');
 
-  response.status(500).end();
+const ERRORS_HANDLERS = {
+  JsonWebTokenError: (response) => response.status(401).json({ error: 'token missing or invalid' }),
+  DefaultError: (response) => response.status(500).end(),
+  TokenExpiredError: (response) => response.status(401).json({ error: 'token expired' }),
+};
+
+// eslint-disable-next-line no-unused-vars
+module.exports = (error, request, response, next) => {
+  console.error(error.name);
+
+  const handler = ERRORS_HANDLERS[error.name] || ERRORS_HANDLERS.DefaultError;
+
+  handler(response,error);
+
 };
