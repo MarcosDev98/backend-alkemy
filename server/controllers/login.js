@@ -46,7 +46,9 @@ loginRouter.post('/', async (require, response) => {
     username: user[0].username
   };
 
-  const token = jwt.sign(userForToken, 'alkemy');
+  const token = jwt.sign(userForToken, 'alkemy', {
+    expiresIn: 60 * 60 * 24
+  });
 
   response.send({
     id: user[0].id,
