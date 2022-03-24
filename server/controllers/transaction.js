@@ -34,7 +34,7 @@ transactionsRouter.put('/update', userExtractor, async (request, response) => {
   const { user_id } = request;
 
   // eslint-disable-next-line quotes
-  await mysqlConnection.query(`UPDATE transaction SET concept=${concept}, amount=${amount}, date=${date}, category_id=${category_id} WHERE id=${id} AND user_id=${user_id};`);
+  await mysqlConnection.query(`UPDATE transaction SET concept='${concept}', amount=${amount}, date='${date}', category_id=${category_id} WHERE id=${id} AND user_id=${user_id};`);
   response.send('transaction updated');
 });
 
