@@ -5,11 +5,12 @@ const userExtractor = require('../middlewares/userExtractor');
 
 
 // OBTENER TRANSACCIONES
-transactionsRouter.get('/', async (req, res) => {
+transactionsRouter.get('/', userExtractor, async (request, response) => {
 
-  const transactions = await mysqlConnection.query('SELECT id, concept, amount, date, user_id, id_type_transaction, is_deleted, category_id FROM transaction WHERE is_deleted=?;', is_not_deleted);
-  console.log(transactions);
-  res.send(transactions);
+  const { user_id } = request;
+
+  const transactions = await mysqlConnection.query(`SELECT id, concept, amount, date, user_id, id_type_transaction, is_deleted, category_id FROM transaction WHERE is_deleted='${is_not_deleted}' AND user_id=${user_id};`);
+  response.send(transactions);
 
 });
 
