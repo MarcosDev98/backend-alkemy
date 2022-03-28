@@ -44,7 +44,7 @@ transactionsRouter.delete('/delete', userExtractor, async (request, response) =>
   const { id } = request.body;
 
   const { user_id } = request;
-  // eslint-disable-next-line quotes
+
   const transactionDeleted =  await mysqlConnection.query(`UPDATE transaction SET is_deleted=? WHERE id=${id} AND user_id=${user_id};`,is_deleted);
 
   console.log(transactionDeleted);

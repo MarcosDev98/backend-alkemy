@@ -8,7 +8,7 @@ module.exports = (request, response, next) => {
     token = authorization.substring(7);
   } 
 
-  console.log('jwt', token);
+  // console.log('jwt', token);
   const decodedToken = jwt.verify(token, 'alkemy');
 
   if (!token ||  !decodedToken.id) {
