@@ -8,6 +8,7 @@ const transactionsRouter = require('./controllers/transaction');
 const typesRouter = require('./controllers/type');
 const categoriesRouter = require('./controllers/category');
 const loginRouter = require('./controllers/login');
+const handleErrors = require('./middlewares/handleErrors');
 
 
 
@@ -15,11 +16,14 @@ app.use(cors());
 app.use(express.json());
   
 
+
 app.use('/api/users', usersRouter);
 app.use('/api/transactions', transactionsRouter);
 app.use('/api/types', typesRouter);
 app.use('/api/categories', categoriesRouter);
 app.use('/api/login', loginRouter);
+
+app.use(handleErrors);
 
 const PORT = 5005;
 app.listen(PORT);
