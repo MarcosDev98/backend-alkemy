@@ -13,8 +13,14 @@ userRouter.post('/create', async (req, res) => {
   const saltRounds = 10;
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-  await mysqlConnection.query(`INSERT INTO user (username, password, email, firstname, lastname, is_deleted) VALUES('${username}', '${hashedPassword}', '${email}', '${firstname}', '${lastname}', '${is_not_deleted}');`);
-  res.send('user added');
+  await mysqlConnection.query(`INSERT INTO user (username, password, email, firstname, lastname, is_deleted) VALUES('${username}', '${hashedPassword}', '${email}', '${firstname}', '${lastname}', '${is_not_deleted}');`, (err, result ) => {
+    if (err) {
+      const error = { code: err.code, message: err.message };
+      throw error;
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 // EDITAR USUARIO
@@ -22,18 +28,28 @@ userRouter.put('/update', async (req, res) => {
   const { id, password, email, firstname, lastname } = req.body;
 
   // eslint-disable-next-line quotes
-  await mysqlConnection.query(`UPDATE user SET password=${password}, email=${email}, firstname=${firstname}, lastname=${lastname} WHERE id=${id};`);
-  res.send('user updated');
+  await mysqlConnection.query(`UPDATE user SET password=${password}, email=${email}, firstname=${firstname}, lastname=${lastname} WHERE id=${id};`, (err, result ) => {
+    if (err) {
+      const error = { code: err.code, message: err.message };
+      throw error;
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 // ELIMINAR USUARIO
 userRouter.delete('/delete', async (req, res) => {
   const { id } = req.body;
 
-  await mysqlConnection.query(`UPDATE user SET is_deleted=${is_deleted} WHERE id=${id};`);
-
-  res.send('user deleted');
-
+  await mysqlConnection.query(`UPDATE user SET is_deleted=${is_deleted} WHERE id=${id};`, (err, result ) => {
+    if (err) {
+      const error = { code: err.code, message: err.message };
+      throw error;
+    } else {
+      res.send(result);
+    }
+  });
 });
 
 
