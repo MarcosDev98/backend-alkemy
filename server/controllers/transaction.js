@@ -25,12 +25,12 @@ transactionsRouter.post('/create', userExtractor, async (request, response) => {
   
   const { user_id } = request;
     
-  await mysqlConnection.query(`INSERT INTO transaction (concept, amount, date, user_id, id_type_transaction, is_deleted, category_id) VALUES('${concept}', ${amount}, '${date}', ${user_id}, ${id_type_transaction}, '${is_not_deleted}', '${0}');`, (err, results ) => {
+  await mysqlConnection.query(`INSERT INTO transaction (concept, amount, date, user_id, id_type_transaction, is_deleted, category_id) VALUES('${concept}', ${amount}, '${date}', ${user_id}, ${id_type_transaction}, '${is_not_deleted}', '${0}');`, (err) => {
     if (err) {
       const error = { code: err.code, message: err.message };
       throw error;
     } else {
-      response.send(results);
+      response.json({ status: 'OK' });
     }
   });
 
@@ -45,12 +45,12 @@ transactionsRouter.put('/update', userExtractor, async (request, response) => {
   const { user_id } = request;
 
   // eslint-disable-next-line quotes
-  await mysqlConnection.query(`UPDATE transaction SET concept='${concept}', amount=${amount}, date='${date}', category_id=${category_id} WHERE id=${id} AND user_id=${user_id};`, (err, results ) => {
+  await mysqlConnection.query(`UPDATE transaction SET concept='${concept}', amount=${amount}, date='${date}', category_id=${category_id} WHERE id=${id} AND user_id=${user_id};`, (err) => {
     if (err) {
       const error = { code: err.code, message: err.message };
       throw error;
     } else {
-      response.send('transaction_updated' + results);
+      response.json({ status: 'OK' });
     }
   });
 });
@@ -61,12 +61,12 @@ transactionsRouter.delete('/delete', userExtractor, async (request, response) =>
 
   const { user_id } = request;
 
-  await mysqlConnection.query(`UPDATE transaction SET is_deleted='${is_deleted}' WHERE id=${id} AND user_id=${user_id};`, (err, results ) => {
+  await mysqlConnection.query(`UPDATE transaction SET is_deleted='${is_deleted}' WHERE id=${id} AND user_id=${user_id};`, (err) => {
     if (err) {
       const error = { code: err.code, message: err.message };
       throw error;
     } else {
-      response.send('transaction_deleted' + results);
+      response.json({ status: 'OK' });
     }
   });
 
